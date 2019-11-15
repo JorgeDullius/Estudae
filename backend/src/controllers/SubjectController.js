@@ -38,6 +38,9 @@ class SubjectController{
     }
     async create(req,res){
         try{
+            if(await subject.findOne({ where: {name: req.body.name}})){
+                res.status(400).json({error : "Subject already exist"});
+            }
             const subjectData = await subject.create(req.body);
             res.send(subjectData);
         }catch(e){

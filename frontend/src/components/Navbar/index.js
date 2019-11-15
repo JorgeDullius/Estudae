@@ -1,14 +1,14 @@
 import MediaQuery from "react-responsive";
 import React from "react";
 import NavBarDesktop from "./Desktop";
-import NavBarMobile from "./Mobile";
+import MobileAppBar from "./Mobile";
 const NavBar = () => (
   <div>
-    <MediaQuery minWidth={779}>
-      <NavBarDesktop />
-    </MediaQuery>
     <MediaQuery maxWidth={779}>
-      <NavBarMobile />
+      <MobileAppBar />
+    </MediaQuery>
+    <MediaQuery minWidth={780}>
+      <NavBarDesktop />
     </MediaQuery>
   </div>
 );

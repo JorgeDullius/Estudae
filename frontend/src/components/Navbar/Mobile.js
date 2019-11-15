@@ -1,57 +1,24 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import logo from "../../assets/logo.svg"
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  loginButton: {
-    backgroundColor: "#60C83C",
-    fontFamily: 'Lato bold 700',
-    fontWeight: 'bold',
-    fontSize: '1em',
-    textTransform: "none",
-  },
-  appBar:{
-    backgroundColor: "#01579B",
-    boxShadow: 'none'
-  },
-  title: {
-    display: "flex",
-    justifyContent: "center",
-    flexGrow: 1,
-  }
-}));
-
-export default function ButtonAppBar() {
-  const classes = useStyles();
-
+import './mobile.css';
+export default function MobileAppBar() {
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="title" className={classes.title}>
-            <img  src={logo} alt="" className={classes.title}/>
-          </Typography>
-          <Button color="inherit" className={classes.loginButton}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
+    <div className="navigation">
+      <input type="checkbox" className="navigation__checkbox" id="navi-toggle" />
+
+      <label for="navi-toggle" className="navigation__button">
+          <span className="navigation__icon">&nbsp;</span>
+      </label>
+
+      <div className="navigation__background">&nbsp;</div>
+
+      <nav className="navigation__nav">
+          <ul className="navigation__list">
+            <li className="navigation__item"><a href="#" className="navigation__link"><span>01</span>Consultar</a></li>
+            <li className="navigation__item"><a href="#" className="navigation__link"><span>02</span>Praticar</a></li>
+            <li className="navigation__item"><a href="#" className="navigation__link"><span>03</span>Sobre nós</a></li>
+            <li className="navigation__item"><a href="#" className="navigation__link"><span>04</span>entrar</a></li>
+          </ul>
+      </nav>
     </div>
   );
 }

@@ -16,13 +16,13 @@ const useStyles = makeStyles(theme => ({
     paddingTop:theme.spacing(2)
   },
   loginButton: {
-    color: '#01579B',
-    backgroundColor: '#fafafa',
+    color: 'white',
+    backgroundColor: 'rgb(45, 228, 115)',
     textTransform: "none",
     marginRight: theme.spacing(12),
     fontFamily: 'Lato',
     fontWeight:'bold',
-    fontSize: '1.2rem',
+    fontSize: '20px',
     lineHeight: '1.5',
 
   },
@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     textTransform: "none",
     fontFamily: 'Lato',
     fontWeight:'bold',
-    fontSize: '1.2rem',
+    fontSize: '20px',
     lineHeight: '1.5',
   },
   title: {
@@ -46,7 +46,7 @@ function NavBarDesktop() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar >
-          <Typography variant="title" className={classes.title}>
+          <Typography variant="h1" className={classes.title}>
             <img  src={logo} alt="" className={classes.title}/>
           </Typography>
           <Button color="inherit" className={classes.menuButton}>

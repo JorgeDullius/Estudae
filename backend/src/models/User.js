@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define('user', {
         name: {
@@ -50,5 +51,9 @@ module.exports = (sequelize, Sequelize) => {
             defaultValue: false
         }
     });
+    User.beforeCreate (async function(user){
+        const hash = await bcrypt.hash(user.password, 12);
+        user.password = hash;
+    })
     return User;
 }

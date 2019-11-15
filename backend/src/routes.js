@@ -3,14 +3,17 @@ const routes = express.Router();
 const userController = require('./controllers/UserController');
 const subjectController = require('./controllers/SubjectController');
 const topicController = require('./controllers/TopicController');
+const authController = require('./controllers/AuthController')
+const authMiddleware = require('./middlewares/auth');
 
-routes.post('/topic', topicController.create);
-routes.delete('/topic', topicController.deleteTopic);
-routes.post('/user', userController.create);
+routes.post('/topic', authMiddleware, topicController.create);
+routes.delete('/topic', authMiddleware, topicController.deleteTopic);
 routes.get('/user/:email', userController.getUserByEmail);
 routes.get('/subject/:subjectName', subjectController.getSubjectByName);
 routes.get('/subject', subjectController.getAllSubjects);
-routes.post('/subject', subjectController.create);
-routes.delete('/subject', subjectController.deleteSubject);
+routes.post('/subject', authMiddleware, subjectController.create);
+routes.delete('/subject', authMiddleware, subjectController.deleteSubject);
+routes.post('/auth/register', authController.register);
+routes.post('/auth/authenticate', authController.authenticate);
 
 module.exports = routes;

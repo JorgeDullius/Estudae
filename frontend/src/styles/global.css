@@ -1,13 +1,31 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i&display=swap');
-* {
+@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700&display=swap');
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; 
+}
+
+html {
+  font-size: 62.5%; 
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  box-sizing: border-box; 
+}
+/** {
     margin: 0;
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-}
+}*/
 html,body, #root{
     height: 100%;
-    background-color: #fafafa;
+    background-color: #ffffff;
 }  

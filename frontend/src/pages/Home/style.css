@@ -1,37 +1,208 @@
-#section1 {
+#header {
     background-color: #01579B;
-    height: 100vh;
+    height: 95vh;
+    width: 100%;
     display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
 }
-#section1 img{
-    padding-left: 15vh;
-    margin-top: -20vh
-}
-#section1 h1{
+#header .header--container{
     position: absolute;
-
-    padding-left: 110vh;
-    margin-top: 25vh;
-    color: #fafafa;
-    font-family: 'Cabin Sketch';
-    font-weight: bold;
-    font-size: 42px;
-    font-style: italic;
-
+    display: flex;
+    justify-content: space-evenly;
+    width:90%;
 }
-#section1 h2{
-    position: relative;
-    padding-left: 10vh;
-    margin-top: 35vh;
+#header .header--container .header--textbox{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 45%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#header .header--container .header--textbox h1{
+    margin-bottom: 2vh;
     color: #fafafa;
     font-family: 'Arvo';
     font-weight: bold;
-    font-size: 20px;
+    font-size: 4rem;
 }
-#section2 {
+#header .header--container .header--textbox p{
+    color: #fafafa;
+    font-family: 'Cabin Sketch';
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+#header .header--container .header--img img{
+    width:100%;
+}
+#about {
     height: 200vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#about .first--about--container{
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width:90%;
+}
+#about .first--about--container .textbox{
+    flex-basis:50%;
+    align-items: center;
+    text-align: center;
+} 
+#about .first--about--container img{
+    width:100%;
+}
+#about .first--about--container .textbox h1{
+    margin-bottom: 2vh;
+    color:rgb(45, 228, 115);
+    font-family: 'Arvo';
+    font-size: 4rem;
+}
+#about .first--about--container .textbox p{
+    color: rgb(132, 141, 158);
+    font-family: 'Arvo';
+    font-size: 2.2rem;
+}
+#about .second--about--container{
+    height: 35%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+}
+#about .second--about--container .circle-subject,.second--about--container .circle-questions {
+    display: flex;
+    height: 82%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-basis: 30%;
+    text-align: center;
+}
+#about .second--about--container .circle-subject h1,.circle-questions h1{
+    font-family: 'Arvo';
+    font-weight: bold;
+    font-size: 2.4em;
+    color:rgb(45, 228, 115);
+}
+#about .second--about--container .circle-subject p,.circle-questions p{
+    color: rgb(132, 141, 158);
+    font-family: 'Arvo';
+    font-size: 1.8rem;
+}
+#elipse{
+    background: #fafafa;
+    border-radius:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    box-shadow: 0 0 1em #fafafa;
+}
+
+#about .third--about--container{
+    height: 35%;
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#about .third--about--container #text{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+#about .third--about--container #other-features{
+    height:90%;
+    display: flex;
+    flex-basis: 40%;
+    flex-direction: column;
+}
+#about .third--about--container #other-features #first-feature, #second-feature, #third-feature{
+    display: flex;
+    height: 33.35%;
+    align-items: center;
+    justify-content: space-around;
+}
+#about .third--about--container #other-features img{
+    width: 20%;
+}
+h3{ 
+    color: rgb(132, 141, 158);
+    font-family: 'Arvo';
+    font-size: 1.7rem;
+    text-align: center;
+}
+h4{ 
+    text-transform: uppercase;
+    font-family: 'Lato';
+    font-weight: 700;
+    line-height: 1.7;
+    font-size: 3rem;
+    background-image: linear-gradient(to right, #7ed56f, #28b485);
+    text-align: center;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: .2rem;
+}
+#text-features{
+    width:50%;
 }
 #section3 {
     background-color: #01579B;
     height: 35vh;
+}
+@media screen and (max-width: 767px) {
+    #header .header--container{  
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #header .header--container .header--textbox button{
+        width:80%;
+    }
+    #about .first--about--container{
+        display: flex;
+        flex-direction: column-reverse;
+        height: 22%;
+    }
+    #about {
+        height: 360vh;
+    }
+    #about .first--about--container .textbox{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #about .second--about--container{
+        display: flex;
+        flex-direction: column;
+        height: 40%;
+    }
+    #about .third--about--container{
+        display: flex;
+        flex-direction: column;
+    }
+    #about .third--about--container #other-features{
+        display: flex;
+        flex-basis: 80%;
+    }
+    #about .third--about--container #other-features #first-feature, #second-feature, #third-feature{
+        display: flex;
+        flex-direction: column;
+    }
+    #text-features{
+        width: 80%;
+    }
+    #about .third--about--container #other-features img{
+        width: 30%;
+    }
 }
