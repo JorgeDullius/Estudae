@@ -1,0 +1,152 @@
+.profile__container{
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.profile__topBar__container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 8vh;
+}
+.profile__topBar__container .topBar{
+    display: flex;
+    justify-self: center;
+    width:90%;
+    justify-content: space-between;
+}
+.profile__info{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: space-between;
+}
+.profile__info img{
+    width: 118px;
+}
+.profile__info h1{
+    font-family: "Lato";
+    font-size:20px;
+    font-weight: 900;
+}
+.profile__info h3{
+    font-family: "Lato";
+    font-size:16px;
+    font-weight: 700;    
+}
+.profile__form{
+    width:70vw;
+    height: 320px;
+    min-width: 300px;
+    max-width: 590px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile__input{
+    width:100%;
+    border-radius: 25px;
+    border:1px solid;
+    border-color: #00B2FF;
+    height: 51px;
+    margin-top:7px;
+    font-family: 'Lato';
+    font-weight: bold;
+    color: black;
+    font-size: 12px;
+    letter-spacing: .1rem;
+    padding: 7px 14px 9px;
+    transition: all 0.2s ease-in-out;
+    outline: 0;
+}
+.profile__input:focus, .profile__input:focus{
+    box-shadow: 0px 0px 0px 2px #6C63FF;
+    border-color: #6C63FF;
+}
+.profile__label{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    font-family: 'Nunito';
+    font-weight: 900;
+    font-size: 16px;
+    color:#2D4885;
+}
+.profile__form button{
+    cursor: pointer;
+    margin-top:8px;
+    color: #ffffff;
+    font-family: "Arial";
+    font-size: 23px;
+    font-weight: bold;
+    background-color: #00B2FF;
+    border:none;
+    width: 177px;
+    height: 50px;
+    border-radius:25px;
+    transition: all 0.5s;
+}
+.profile__form button:disabled{
+    cursor: not-allowed;   
+    background-color: rgba(0, 179, 255, 0.51);
+}
+.profile__form button:enabled span {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+  
+.profile__form button:enabled span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+.profile__form button:enabled:hover span {
+    padding-right: 25px;
+}
+  
+.profile__form button:enabled:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+.profile__container a{
+    margin-top:8px;
+    font-family: 'Lato';
+    font-weight: bold;
+    font-size: 12px;
+    color: #00B2FF;
+}
+.profile__container .backButton{
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    width:50px;
+    align-items: center;
+    cursor:pointer;
+    border:0;
+    font-size:15px;
+    font-family: 'Lato';
+    font-weight: bold;
+    color: #00B2FF;
+}
+@media screen and (max-width: 965px) {
+    .profile__topBar__logo{
+        width: 80px;
+    }
+    .backButton{
+        width:80px;
+    }
+    .profile__topBar__container{
+        height: 6vh;
+    }
+}

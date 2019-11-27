@@ -7,8 +7,11 @@ import Fab from '@material-ui/core/Fab';
 const styles = {
     buttonStyle: {
         backgroundColor: "rgb(45, 158, 228);",
-        fontFamily: 'Arvo',
-        fontWeight: 'bold',
+        '&:hover': {
+          backgroundColor: "#00B2FF;",
+        },
+        fontFamily: 'Nunito',
+        fontWeight: '900',
         fontSize: '1.7em',
         color:'white',
         textTransform: "none",

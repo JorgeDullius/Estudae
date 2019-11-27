@@ -16,7 +16,7 @@ export default function MobileAppBar() {
             <li className="navigation__item"><a href="#" className="navigation__link"><span>01</span>Consultar</a></li>
             <li className="navigation__item"><a href="#" className="navigation__link"><span>02</span>Praticar</a></li>
             <li className="navigation__item"><a href="#" className="navigation__link"><span>03</span>Sobre nós</a></li>
-            <li className="navigation__item"><a href="#" className="navigation__link"><span>04</span>entrar</a></li>
+            <li className="navigation__item"><a href="http://localhost:3000/signup" className="navigation__link"><span>04</span>Entrar</a></li>
           </ul>
       </nav>
     </div>

@@ -15,8 +15,8 @@ export default class Home extends React.Component {
     return (
       <>
         <NavBar />
-        <section id = "header">
-          <div className="header--container">
+        <section className = "header">
+          <div className = "header--container">
             <div className = "header--img">
               <img src={student} alt="cara estudando"/>
             </div>
@@ -31,7 +31,7 @@ export default class Home extends React.Component {
             </div>
           </div>
         </section>
-        <section id = "about">
+        <section className = "about">
           <div className="first--about--container">
             <div className = "textbox">
               <h4>Sobre o estudaê</h4>
@@ -53,8 +53,8 @@ export default class Home extends React.Component {
           }}/>
           <div className="second--about--container">
             <div className = "circle-subject"> 
-              <div id="elipse"><img id="subject--image" src={notebook} alt=""></img></div>
-              <h1>Conteúdo</h1>
+              <div className = "elipse" id="elipse"><img id="subject--image" src={notebook} alt=""></img></div>
+              <h5>Conteúdo</h5>
               <h3>
                 Presentations are communication tools 
                 that can be used as demonstrations, 
@@ -63,8 +63,8 @@ export default class Home extends React.Component {
               <Button type="fab"  text = "Consultar"/>
             </div>
             <div className = "circle-questions">
-              <div id="elipse"><img id="question--image" src={book} alt=""></img></div>
-              <h1>Exercícios</h1>
+              <div id="elipse" className = "elipse"><img id="question--image" src={book} alt=""></img></div>
+              <h5>Exercícios</h5>
               <h3>
                 Presentations are communication tools 
                 that can be used as demonstrations, 
@@ -81,7 +81,7 @@ export default class Home extends React.Component {
           }}/>
 
           <div className="third--about--container">
-            <div id = "text">
+            <div className = "text">
               <h4>Outros recursos</h4>
             </div>
             <div id = "other-features">

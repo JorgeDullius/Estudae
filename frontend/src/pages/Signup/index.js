@@ -91,7 +91,7 @@ class Signup extends Component {
                     email
                 });
                 login(response.data.token);
-                this.props.history.push("/logado");
+                this.props.history.push("/profile");
             }catch(error){
                 toast.error(error.response.data.error, {
                     position: "bottom-right",
@@ -114,7 +114,7 @@ class Signup extends Component {
                         pauseOnVisibilityChange
                     />
                     <div className="topBar">
-                        <button id="backButton">
+                        <button className="backButton" onClick={()=>this.props.history.push("/")}>
                             <img src={back} alt="" />
                             Back
                         </button>
@@ -132,6 +132,7 @@ class Signup extends Component {
                             <label id="labelForm">
                                 Username:
                                 <input 
+                                    className = "input__signup"
                                     type="text" 
                                     value = {this.state.name} 
                                     placeholder="Your name here" 
@@ -149,6 +150,7 @@ class Signup extends Component {
                             <label id="labelForm">
                                 Password:
                                 <input 
+                                    className = "input__signup"
                                     type="password" 
                                     value = {this.state.password} 
                                     placeholder="Your password here" 
@@ -166,6 +168,7 @@ class Signup extends Component {
                             <label id="labelForm">
                                 Email:
                                 <input 
+                                    className = "input__signup"
                                     type="text" 
                                     value = {this.state.email} 
                                     placeholder="Your email here" 
@@ -174,11 +177,16 @@ class Signup extends Component {
                                     onFocus={() => this.setState({emailError: ""})} 
                                     onChange={this.handleInputChange}
                                 />
-                                <span className={this.state.emailError !== '' ? "negativeFeedback" : "positiveFeedback"}><FontAwesomeIcon icon={faExclamationCircle} color="red" /> {this.state.emailError}</span>
+                                <span className={this.state.emailError !== '' ? "negativeFeedback" : "positiveFeedback"}>
+                                    <FontAwesomeIcon icon={faExclamationCircle} color="red" /> 
+                                    {this.state.emailError}
+                                </span>
                             </label>
 
 
-                            <button disabled = {!this.state.formIsValid}> <span>Sign Up</span></button>
+                            <button disabled = {!this.state.formIsValid}> 
+                                <span>Sign Up</span>
+                            </button>
                             <a href="localhost:3000/signup/#">Já tem conta? Clique aqui para acessar.</a>
                         </form>
                     </div>

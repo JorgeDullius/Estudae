@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
   loginButton: {
     color: 'white',
     backgroundColor: 'rgb(45, 228, 115)',
+    '&:hover': {
+      backgroundColor: "#00B2FF;",
+    },
     textTransform: "none",
     marginRight: theme.spacing(12),
     fontFamily: 'Lato',
@@ -55,7 +58,7 @@ function NavBarDesktop() {
           <Button color="inherit" className={classes.menuButton}>
             Praticar
           </Button>
-          <Button color="inherit" className={classes.loginButton}>
+          <Button href="http://localhost:3000/signup" color="inherit" className={classes.loginButton}>
             Sou professor (a)
           </Button>
         </Toolbar>
