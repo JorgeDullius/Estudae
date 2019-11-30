@@ -3,8 +3,8 @@
 }
 .navigation__button {
     background-color: #fff;
-    height: 7rem;
-    width: 7rem;
+    height: 6rem;
+    width: 6rem;
     position: fixed;
     top: 6rem;
     right: 6rem;
@@ -17,20 +17,20 @@
 }
 @media only screen and (max-width: 56.25em) {
     .navigation__button {
-        top: 4rem;
-        right: 4rem; 
-    } 
-}
-@media only screen and (max-width: 37.5em) {
-    .navigation__button {
         top: 3rem;
         right: 3rem; 
     } 
 }
+@media only screen and (max-width: 37.5em) {
+    .navigation__button {
+        top: 2rem;
+        right: 2rem; 
+    } 
+}
   
 .navigation__background {
-    height: 6rem;
-    width: 6rem;
+    height: 4rem;
+    width: 4rem;
     border-radius: 50%;
     position: fixed;
     top: 6.5rem;
@@ -96,10 +96,6 @@
     -webkit-transition: all .4s;
     transition: all .4s; 
 }
-.navigation__link:link span, .navigation__link:visited span {
-    margin-right: 1.5rem;
-    display: inline-block; 
-}
 
 .navigation__link:hover, .navigation__link:active {
     background-position: 100%;
@@ -120,7 +116,7 @@
 
 .navigation__icon {
     position: relative;
-    margin-top: 3.5rem; 
+    margin-top: 3rem; 
 }
 .navigation__icon, .navigation__icon::before, .navigation__icon::after {
     width: 3rem;
@@ -164,7 +160,4 @@
     top: 0;
     -webkit-transform: rotate(-135deg);
             transform: rotate(-135deg); 
-}
-@media only screen and (max-width: 360px) {
-
 }

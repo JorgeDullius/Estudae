@@ -43,6 +43,11 @@ module.exports = (sequelize, Sequelize) => {
                 },
                 notEmpty: {
                     msg: "O campo senha não pode ser vazio."
+                },
+                isValidePassword(password){
+                    if(password.trim().length < 6){
+                        throw new Error('Please enter a password longer than 6 characters');
+                    }
                 }
             }
         },

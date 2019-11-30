@@ -41,13 +41,9 @@
 }
 .login form{
     height: 475px;
-    display: -webkit-box;
     display: flex;
     flex-basis: 40vw;
     flex-direction: column;
-    flex-flow:column;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-evenly;
     justify-content: space-evenly;
 }
 

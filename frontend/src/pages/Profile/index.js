@@ -6,6 +6,8 @@ import profile_pic from '../../assets/profile_pic.svg';
 import { withRouter } from "react-router-dom";
 import { logout } from "../../services/auth";
 import api from '../../services/api';
+import { ToastContainer, toast  } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
 
 class Profile extends Component {
     constructor(props){
@@ -35,19 +37,40 @@ class Profile extends Component {
       console.log(e);
     }
   }
-  handleSubmit = async () => {
-    const { name, password, email } = this.state;
-    await api.post('/user/profile', {
-      name,
-      password,
-      email
-    })
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    try{
+      const { name, password, email } = this.state;
+      await api.post('/user/profile', {
+        name,
+        password,
+        email
+      })
+      this.props.history.push("/");
+
+    }catch(error){
+      error.response.data.forEach(async (error) =>{
+        await toast.error(error, {
+          position: "bottom-right",
+          autoClose: 7000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          className:"toastifyStyle"
+        });    
+      })
+    }
   }
 
   render() {
     return (
       <>
         <div className="profile__topBar__container">
+        <ToastContainer 
+                        rtl={false}
+                        pauseOnVisibilityChange
+                    />
           <div className="topBar">
             <button className="backButton" onClick={()=>this.props.history.push("/")}>
                 <img src={back} alt="" />
@@ -63,7 +86,7 @@ class Profile extends Component {
             <a href="#"> Change image </a>
             <h3> Jorge Dullius </h3>
           </div>
-          <form className="profile__form">
+          <form onSubmit={this.handleSubmit} className="profile__form">
             <label className="profile__label">
               Name:
               <input name="name" className="profile__input" type="text" onChange={this.handleInputChange} value={this.state.name} />
@@ -76,7 +99,7 @@ class Profile extends Component {
               Password:
               <input name="password" className="profile__input" type="password" onChange={this.handleInputChange} />
             </label>
-            <button onSubmit={this.handleSubmit}>
+            <button>
               <span>Save</span>
             </button>
           </form>
