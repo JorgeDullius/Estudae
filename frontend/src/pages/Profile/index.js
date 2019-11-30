@@ -5,8 +5,45 @@ import './style.css';
 import profile_pic from '../../assets/profile_pic.svg';
 import { withRouter } from "react-router-dom";
 import { logout } from "../../services/auth";
+import api from '../../services/api';
 
 class Profile extends Component {
+    constructor(props){
+      super(props);
+      this.state = { 
+          name:'', 
+          password:'', 
+          email:''
+      }
+  }
+  handleInputChange = async (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    await this.setState({
+      [name]: value
+    });
+  }
+  componentDidMount = async () => {
+    try{
+      const { data } = await api.get('/user/profile');
+      await this.setState({
+        name: data.name, 
+        password: data.password, 
+        email: data.email
+      });
+    }catch(e){
+      console.log(e);
+    }
+  }
+  handleSubmit = async () => {
+    const { name, password, email } = this.state;
+    await api.post('/user/profile', {
+      name,
+      password,
+      email
+    })
+  }
+
   render() {
     return (
       <>
@@ -29,21 +66,22 @@ class Profile extends Component {
           <form className="profile__form">
             <label className="profile__label">
               Name:
-              <input className="profile__input" type="text" placeholder="Your name here" />
+              <input name="name" className="profile__input" type="text" onChange={this.handleInputChange} value={this.state.name} />
             </label>
             <label className="profile__label">
               Email:
-              <input className="profile__input" type="text" placeholder="Your name here" />
+              <input name="email" className="profile__input" type="text" onChange={this.handleInputChange} value={this.state.email} />
             </label>
             <label className="profile__label">
               Password:
-              <input className="profile__input" type="password" placeholder="Your name here" />
+              <input name="password" className="profile__input" type="password" onChange={this.handleInputChange} />
             </label>
-            <button>
+            <button onSubmit={this.handleSubmit}>
               <span>Save</span>
             </button>
           </form>
-          <a href="#" className = "form__signout" 
+          <a href="#" 
+            className = "form__signout" 
             onClick={() => {logout(); this.props.history.push("/")}}> Signout</a>
         </div>
       </>

@@ -8,7 +8,11 @@ const authMiddleware = require('./middlewares/auth');
 
 routes.post('/topic', authMiddleware, topicController.create);
 routes.delete('/topic', authMiddleware, topicController.deleteTopic);
-routes.get('/user/:email', userController.getUserByEmail);
+//routes.get('/user/profile/:id', userController.getUserById);
+
+routes.get('/user/profile', authMiddleware, userController.getUser);
+routes.post('/user/profile', authMiddleware, userController.setUser);
+
 routes.get('/subject/:subjectName', subjectController.getSubjectByName);
 routes.get('/subject', subjectController.getAllSubjects);
 routes.post('/subject', authMiddleware, subjectController.create);
