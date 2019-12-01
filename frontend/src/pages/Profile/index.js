@@ -6,23 +6,77 @@ import profile_pic from '../../assets/profile_pic.svg';
 import { withRouter } from "react-router-dom";
 import { logout } from "../../services/auth";
 import api from '../../services/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import { ToastContainer, toast  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'
 
 class Profile extends Component {
-    constructor(props){
-      super(props);
-      this.state = { 
-          name:'', 
-          password:'', 
-          email:''
+  constructor(props){
+    super(props);
+    this.state = { 
+      name:'', 
+      password:'', 
+      email:'',
+      nameError:'',
+      passwordError:'',
+      emailError:'',
+      edited: false,
+      formIsValid: false
+    }
+  }
+  formValidate = () => {
+    if(this.state.nameError === '' && this.state.passwordError === '' && this.state.emailError === '' && this.state.name !== '' && this.state.password !== '' && this.state.email !== '' ){
+      this.setState({formIsValid: true})
+    }else{
+      this.setState({formIsValid: false})
+    }
+  }
+  validateName = () => {
+      const {name} = this.state; 
+      if(!name || name.trim() === ''){
+          this.setState({nameError : "Please type your name"});
+          this.formValidate();
+          return false;
       }
+      this.formValidate();
+      return true;
+  }
+  validatePassword = () => {
+      const {password} = this.state; 
+      if(!password || password.trim() === ''){
+          this.setState({passwordError : "Please type your password"});
+          this.formValidate();
+          return false;
+      }
+      else if(password.length < 6){
+          this.setState({passwordError : "Your password must be longer than 6 characters"});
+          this.formValidate();
+          return false;
+      }
+      this.formValidate();
+      return true;
+  }    
+  validateEmail = () => {
+      const {email} = this.state; 
+      if(!email || email.trim() === ''){
+          this.setState({emailError : "Please type your email"});
+          this.formValidate();
+          return false;
+      }else if (email.indexOf(['@ifms.edu.br']) === -1){
+          this.setState({emailError : 'Please enter an email with the termination "@ifms.edu.br"'});
+          this.formValidate();
+          return false;
+      }
+      this.formValidate();
+      return true;
   }
   handleInputChange = async (event) => {
     const name = event.target.name;
     const value = event.target.value;
     await this.setState({
-      [name]: value
+      [name]: value,
+      edited:true
     });
   }
   componentDidMount = async () => {
@@ -39,18 +93,15 @@ class Profile extends Component {
   }
   handleSubmit = async (event) => {
     event.preventDefault();
-    try{
-      const { name, password, email } = this.state;
-      await api.post('/user/profile', {
-        name,
-        password,
-        email
-      })
-      this.props.history.push("/");
-
-    }catch(error){
-      error.response.data.forEach(async (error) =>{
-        await toast.error(error, {
+    if(this.validateName() === true && this.validateEmail() === true && this.validatePassword() === true){
+      try{
+        const { name, password, email } = this.state;
+        const response = await api.post('/user/profile', {
+          name,
+          password,
+          email
+        })
+        await toast.success(response.data, {
           position: "bottom-right",
           autoClose: 7000,
           hideProgressBar: false,
@@ -59,7 +110,17 @@ class Profile extends Component {
           draggable: true,
           className:"toastifyStyle"
         });    
-      })
+      }catch(error){
+        await toast.error(error.response.data.error, {
+          position: "bottom-right",
+          autoClose: 7000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          className:"toastifyStyle"
+        });    
+      }
     }
   }
 
@@ -89,17 +150,52 @@ class Profile extends Component {
           <form onSubmit={this.handleSubmit} className="profile__form">
             <label className="profile__label">
               Name:
-              <input name="name" className="profile__input" type="text" onChange={this.handleInputChange} value={this.state.name} />
+              <input 
+                value = {this.state.name} 
+                name="name" 
+                className="profile__input" 
+                type="text" 
+                onBlur={this.validateName} 
+                onFocus={() => this.setState({nameError: ""})} 
+                onChange = {this.handleInputChange} 
+              />
+              <span className={this.state.nameError !== '' ? "negativeFeedback" : "positiveFeedback"}>
+                  <FontAwesomeIcon icon={faExclamationCircle} />
+                  {this.state.nameError}
+              </span>
             </label>
             <label className="profile__label">
               Email:
-              <input name="email" className="profile__input" type="text" onChange={this.handleInputChange} value={this.state.email} />
+              <input 
+                name="email" 
+                className="profile__input" 
+                type="text" 
+                value={this.state.email} 
+                onBlur={this.validateEmail} 
+                onFocus={() => this.setState({emailError: ""})} 
+                onChange={this.handleInputChange}
+              />
+              <span className={this.state.emailError !== '' ? "negativeFeedback" : "positiveFeedback"}>
+                  <FontAwesomeIcon icon={faExclamationCircle} color="red" /> 
+                  {this.state.emailError}
+              </span>
             </label>
             <label className="profile__label">
               Password:
-              <input name="password" className="profile__input" type="password" onChange={this.handleInputChange} />
+              <input 
+                name="password" 
+                className="profile__input" 
+                type="password" 
+                onBlur={this.validatePassword} 
+                onFocus={() => this.setState({passwordlError: ""})} 
+                onChange={this.handleInputChange}
+              />
+              <span className={this.state.passwordError !== '' ? "negativeFeedback" : "positiveFeedback"}>
+                <FontAwesomeIcon icon={faExclamationCircle} color="red" /> 
+                {this.state.passwordError}
+              </span>  
             </label>
-            <button>
+            <button disabled = {!this.state.edited || !this.state.formIsValid}>
               <span>Save</span>
             </button>
           </form>

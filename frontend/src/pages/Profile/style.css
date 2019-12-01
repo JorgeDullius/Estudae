@@ -40,7 +40,8 @@
 }
 .profile__form{
     width:70vw;
-    height: 320px;
+    min-height: 320px;
+    max-height: 360px;
     min-width: 300px;
     max-width: 590px;
     display: flex;
@@ -138,6 +139,24 @@
     font-family: 'Lato';
     font-weight: bold;
     color: #00B2FF;
+}
+.negativeFeedback{
+    transition: opacity 0.5s; 
+    visibility:visible; 
+    opacity:1;
+    margin-top: 3px;
+    margin-right:5px;
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    color:red;
+    font-family: 'Lato';
+    font-weight: 900;
+    font-size: 12px;
+}
+.positiveFeedback{
+    visibility:hidden; 
+    opacity:0
 }
 @media screen and (max-width: 965px) {
     .profile__topBar__logo{
