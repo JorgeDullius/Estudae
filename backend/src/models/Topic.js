@@ -1,6 +1,5 @@
-const server = require('../server.js');
 module.exports = (sequelize,Sequelize) => {
-    const Topic = sequelize.define('topic', {
+    const Topic = sequelize.define('Topic', {
         name: {
             type: Sequelize.STRING,
             allowNull: false,

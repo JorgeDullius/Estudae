@@ -1,5 +1,6 @@
 const sequelize = require("../server")
 const user = sequelize.import('../models/User');
+const profilePicture = sequelize.import('../models/ProfilePicture');
 const Sequelize = require('sequelize');
 
 
@@ -39,6 +40,17 @@ class UserController{
         } catch (error) {
             res.status(500).json({error : `${e}`});
         }
+    }
+    async setUserProfilePicture(req,res){
+        const { originalname: name, filename: key, size } = req.file;
+        const response = await profilePicture.create({
+            name,
+            key,
+            size,
+            url:"",
+            UserId: 1
+        });
+        res.json(response)
     }
 
 }

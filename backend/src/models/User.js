@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
+const sequelize = require('../server');
+const ProfilePicture = sequelize.import('./ProfilePicture');
 module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define('user', {
+    const User = sequelize.define('User', {
         name: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -55,6 +57,12 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             defaultValue: false
         }
+    });
+    User.hasOne(ProfilePicture, {
+        foreignKey: {
+          allowNull: false
+        },
+        onDelete: 'CASCADE'
     });
     User.beforeCreate (async function(user){
         const hash = await bcrypt.hash(user.password, 12);

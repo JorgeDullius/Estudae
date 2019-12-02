@@ -1,7 +1,7 @@
 const sequelize = require('../server');
 const Topic = sequelize.import('./Topic');
 module.exports = (sequelize, Sequelize) => {
-    const Subject = sequelize.define('subject', {
+    const Subject = sequelize.define('Subject', {
         name: { 
             type: Sequelize.STRING, 
             allowNull: false, 
