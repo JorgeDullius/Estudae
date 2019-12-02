@@ -10,7 +10,7 @@ const multerConfig = require('./config/multer');
 
 routes.post('/topic', authMiddleware, topicController.create);
 routes.delete('/topic', authMiddleware, topicController.deleteTopic);
-routes.get('/user/profile/:id', userController.getUser);
+//routes.get('/user/profile/:id', userController.getUser);
 
 routes.get('/user/profile', authMiddleware, userController.getUser);
 routes.post('/user/profile', authMiddleware, userController.setUser);

@@ -7,8 +7,7 @@ const Sequelize = require('sequelize');
 class UserController{
     async getUser(req,res){
         try{
-            const { dataValues } = await user.findOne({ where: { id: req.userId }});
-            const userData = dataValues;
+            const userData  = await user.findOne({ where: { id: req.userId }});
             if(!userData){
                 res.status(400).json({error : "User not found" })
             }
@@ -42,15 +41,26 @@ class UserController{
         }
     }
     async setUserProfilePicture(req,res){
-        const { originalname: name, filename: key, size } = req.file;
-        const response = await profilePicture.create({
-            name,
-            key,
-            size,
-            url:"",
-            UserId: 1
-        });
-        res.json(response)
+        try{
+            const { originalname: name, filename: key, size } = req.file;
+            const picture = await profilePicture.findOne({ where: { UserId: 1 }});
+            if(!picture){
+                const response = await profilePicture.create({
+                    name,
+                    key,
+                    size,
+                    url:"",
+                    UserId: 1
+                });
+                res.json(response)
+            }else{
+                const response = await profilePicture.update({ name, key, size, url:""}, { where: { UserId: 1 } });
+                res.json(response)
+            }
+        }catch(e){
+            res.status(400).json({error : `${e}`});
+        }
+
     }
 
 }

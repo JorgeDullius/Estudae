@@ -1,8 +1,6 @@
 export const TOKEN_KEY = "@estudae-Token";
 
-export const isAuthenticated = () => {
-  console.log(localStorage.getItem(TOKEN_KEY));
-  return localStorage.getItem(TOKEN_KEY) !== null}
+export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
   ;
 
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
