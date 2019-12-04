@@ -120,12 +120,19 @@
     opacity: 1;
     right: 0;
 }
-.profile__container a{
+.profile__container .labelFileInput, .profile__container a{
+    cursor:pointer;
     margin-top:8px;
     font-family: 'Lato';
     font-weight: bold;
     font-size: 12px;
     color: #00B2FF;
+}
+.profile__container .labelFileInput:hover{
+    color: rgba(0, 179, 255, 0.605);
+}
+.profile__container .fileInput{
+    display: none;
 }
 .profile__container .backButton{
     background-color: #ffffff;

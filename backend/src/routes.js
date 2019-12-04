@@ -13,8 +13,7 @@ routes.delete('/topic', authMiddleware, topicController.deleteTopic);
 //routes.get('/user/profile/:id', userController.getUser);
 
 routes.get('/user/profile', authMiddleware, userController.getUser);
-routes.post('/user/profile', authMiddleware, userController.setUser);
-routes.post('/user/profile/picture', authMiddleware, multer(multerConfig).single("file"), userController.setUserProfilePicture);
+routes.post('/user/profile', authMiddleware, multer(multerConfig).single("file"), userController.setUser);
 routes.get('/subject/:subjectName', subjectController.getSubjectByName);
 routes.get('/subject', subjectController.getAllSubjects);
 routes.post('/subject', authMiddleware, subjectController.create);

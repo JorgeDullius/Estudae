@@ -71,10 +71,10 @@ class Signup extends Component {
         return true;
     }
 
-    handleInputChange = async (event) => {
+    handleInputChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        await this.setState({
+        this.setState({
             [name]: value
         });
         this.formValidate();

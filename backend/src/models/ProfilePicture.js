@@ -15,8 +15,16 @@ module.exports = (sequelize, Sequelize) => {
         },
         url:{
             type: Sequelize.STRING,
-            allowNull: false, 
+            allowNull: true, 
         }
     });
+    ProfilePicture.beforeCreate(function(profile){
+        if(!profile.url){
+            profile.url = `http://localhost:3000/files/${profile.key}`;
+        }
+    })
+    ProfilePicture.beforeBulkUpdate(({attributes})=>{
+        attributes.url = `http://localhost:3000/files/${attributes.key}`;
+    })
     return ProfilePicture;
 }

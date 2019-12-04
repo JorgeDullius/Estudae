@@ -22,7 +22,20 @@ class Profile extends Component {
       passwordError:'',
       emailError:'',
       edited: false,
-      formIsValid: false
+      formIsValid: false,
+      file:null
+    }
+  }
+  componentDidMount = async () => {
+    try{
+      const { data } = await api.get('/user/profile');
+      this.setState({
+        name: data.name, 
+        password: data.password, 
+        email: data.email
+      });
+    }catch(e){
+      console.log(e);
     }
   }
   formValidate = () => {
@@ -71,36 +84,37 @@ class Profile extends Component {
       this.formValidate();
       return true;
   }
+  handleImageInputChange = (event) => {
+    this.setState({
+      file: event.target.files[0],
+      edited:true
+    });
+  }
   handleInputChange = async (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    await this.setState({
+    this.setState({
       [name]: value,
       edited:true
     });
   }
-  componentDidMount = async () => {
-    try{
-      const { data } = await api.get('/user/profile');
-      await this.setState({
-        name: data.name, 
-        password: data.password, 
-        email: data.email
-      });
-    }catch(e){
-      console.log(e);
-    }
-  }
   handleSubmit = async (event) => {
     event.preventDefault();
     if(this.validateName() === true && this.validateEmail() === true && this.validatePassword() === true){
+      var form = new FormData();
+      const { name, password, email, file } = this.state;
+      form.append("file", file);
+      form.append("name", name);
+      form.append("email", email);
+      form.append("password", password);
       try{
-        const { name, password, email } = this.state;
-        const response = await api.post('/user/profile', {
-          name,
-          password,
-          email
+        const response = await api.post('/user/profile', form,{
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
+          }
         })
+
         await toast.success(response.data, {
           position: "bottom-right",
           autoClose: 7000,
@@ -128,10 +142,10 @@ class Profile extends Component {
     return (
       <>
         <div className="profile__topBar__container">
-        <ToastContainer 
-                        rtl={false}
-                        pauseOnVisibilityChange
-                    />
+          <ToastContainer 
+            rtl={false}
+            pauseOnVisibilityChange
+          />
           <div className="topBar">
             <button className="backButton" onClick={()=>this.props.history.push("/")}>
                 <img src={back} alt="" />
@@ -144,10 +158,13 @@ class Profile extends Component {
           <div className="profile__info">
             <h1> Edit profile </h1>
             <img src={profile_pic}></img>
-            <a href="#"> Change image </a>
-            <h3> Jorge Dullius </h3>
+            <label className="labelFileInput"> 
+              Change image 
+              <input name="file" id="upload" type="file" onChange={this.handleImageInputChange}  className="fileInput"/>
+            </label>
+            <h3> {this.state.name} </h3>
           </div>
-          <form onSubmit={this.handleSubmit} className="profile__form">
+          <form encType="multipart/form-data" onSubmit={this.handleSubmit} className="profile__form">
             <label className="profile__label">
               Name:
               <input 
