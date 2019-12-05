@@ -20,11 +20,11 @@ module.exports = (sequelize, Sequelize) => {
     });
     ProfilePicture.beforeCreate(function(profile){
         if(!profile.url){
-            profile.url = `http://localhost:3000/files/${profile.key}`;
+            profile.url = `http://localhost:3001/files/${profile.key}`;
         }
     })
     ProfilePicture.beforeBulkUpdate(({attributes})=>{
-        attributes.url = `http://localhost:3000/files/${attributes.key}`;
+        attributes.url = `http://localhost:3001/files/${attributes.key}`;
     })
     return ProfilePicture;
 }

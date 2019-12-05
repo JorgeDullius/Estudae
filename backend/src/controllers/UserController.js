@@ -7,11 +7,11 @@ class UserController{
     async getUser(req,res){
         try{
             let userData  = await user.findOne({ where: { id: req.userId }});
-            const picture = await profilePicture.findOne({ where: { UserId: 1 }});
+            const picture = await profilePicture.findOne({ where: { UserId: req.userId }});
             if(picture !== null){
                 var { name: pictureName, key: pictureKey, url: pictureUrl } = picture;
             }else{
-                var pictureName = '', pictureKey = '', pictureUrl = '', pictureSize = 0;
+                var pictureName = '', pictureKey = '', pictureUrl = '';
             }
             userData = {...userData.dataValues, pictureName, pictureKey, pictureUrl};
 
@@ -44,22 +44,14 @@ class UserController{
                     const { originalname: name, filename: key, size } = req.file;
                     const picture = await profilePicture.findOne({ where: { UserId: req.userId }});
                     if(!picture){
-                        try{
-                            profilePicture.create({
-                                name,
-                                key,
-                                size,
-                                UserId: req.userId
-                            });
-                        }catch(e){
-                            res.status(400).json({error : `${error}`});
-                        }
+                        profilePicture.create({
+                            name,
+                            key,
+                            size,
+                            UserId: req.userId
+                        });
                     }else{
-                        try{
-                            profilePicture.update({ name, key, size }, { where: { UserId: req.userId }, individualHooks: true });
-                        }catch(e){
-                            res.status(400).json({error : `${error}`});
-                        }
+                        profilePicture.update({ name, key, size }, { where: { UserId: req.userId }, individualHooks: true });
                     }
                 }
                 if(response > 0){

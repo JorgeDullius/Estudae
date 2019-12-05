@@ -23,7 +23,8 @@ class Profile extends Component {
       emailError:'',
       edited: false,
       formIsValid: false,
-      file:null
+      file:null,
+      url:''
     }
   }
   componentDidMount = async () => {
@@ -32,7 +33,8 @@ class Profile extends Component {
       this.setState({
         name: data.name, 
         password: data.password, 
-        email: data.email
+        email: data.email,
+        url: data.pictureUrl
       });
     }catch(e){
       console.log(e);
@@ -43,6 +45,13 @@ class Profile extends Component {
       this.setState({formIsValid: true})
     }else{
       this.setState({formIsValid: false})
+    }
+  }
+  validatePicture = (picture) => {
+    if(picture.type !== 'image/jpeg' && picture.type !== 'image/pjpeg' && picture.type !== 'image/png'){
+      throw new Error("Invalid picture type");
+    }else if(picture.size > (2 * 1024 * 1024)){
+      throw new Error("Invalid picture size");
     }
   }
   validateName = () => {
@@ -84,11 +93,18 @@ class Profile extends Component {
       this.formValidate();
       return true;
   }
-  handleImageInputChange = (event) => {
-    this.setState({
-      file: event.target.files[0],
-      edited:true
-    });
+  handleImageInputChange = async (event) => {
+    try{    
+      this.validatePicture(event.target.files[0]);
+      this.setState({
+        file: event.target.files[0],
+        url: URL.createObjectURL(event.target.files[0]),
+        edited:true
+      });
+      this.formValidate();
+    }catch(error){
+      toast.error(error.message);  
+    }
   }
   handleInputChange = async (event) => {
     const name = event.target.name;
@@ -114,26 +130,9 @@ class Profile extends Component {
             'Content-Type': `multipart/form-data; boundary=${form._boundary}`,
           }
         })
-
-        await toast.success(response.data, {
-          position: "bottom-right",
-          autoClose: 7000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          className:"toastifyStyle"
-        });    
+        toast.success(response.data);    
       }catch(error){
-        await toast.error(error.response.data.error, {
-          position: "bottom-right",
-          autoClose: 7000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          className:"toastifyStyle"
-        });    
+        toast.error(error.response.data.error);    
       }
     }
   }
@@ -145,6 +144,13 @@ class Profile extends Component {
           <ToastContainer 
             rtl={false}
             pauseOnVisibilityChange
+            position = "bottom-right"
+            autoClose = {7000}
+            hideProgressBar = {false}
+            closeOnClick = {false}
+            pauseOnHover = {true}
+            draggable = {true}
+            className = "toastifyStyle"
           />
           <div className="topBar">
             <button className="backButton" onClick={()=>this.props.history.push("/")}>
@@ -157,10 +163,10 @@ class Profile extends Component {
         <div className="profile__container">
           <div className="profile__info">
             <h1> Edit profile </h1>
-            <img src={profile_pic}></img>
+            <img src={this.state.url === '' ? profile_pic : this.state.url}></img>
             <label className="labelFileInput"> 
               Change image 
-              <input name="file" id="upload" type="file" onChange={this.handleImageInputChange}  className="fileInput"/>
+              <input name="file" id="upload" type="file" onChange={this.handleImageInputChange} className="fileInput"/>
             </label>
             <h3> {this.state.name} </h3>
           </div>

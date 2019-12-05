@@ -93,15 +93,7 @@ class Signup extends Component {
                 login(response.data.token);
                 this.props.history.push("/profile");
             }catch(error){
-                toast.error(error.response.data.error, {
-                    position: "bottom-right",
-                    autoClose: 7000,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    className:"toastifyStyle"
-                });
+                toast.error(error.response.data.error);
             }
         }
     }
@@ -112,6 +104,13 @@ class Signup extends Component {
                     <ToastContainer 
                         rtl={false}
                         pauseOnVisibilityChange
+                        position = "bottom-right"
+                        autoClose = {7000}
+                        hideProgressBar = {false}
+                        closeOnClick = {false}
+                        pauseOnHover = {true}
+                        draggable = {true}
+                        className = "toastifyStyle"
                     />
                     <div className="topBar">
                         <button className="backButton" onClick={()=>this.props.history.push("/")}>
@@ -182,8 +181,6 @@ class Signup extends Component {
                                     {this.state.emailError}
                                 </span>
                             </label>
-
-
                             <button disabled = {!this.state.formIsValid}> 
                                 <span>Sign Up</span>
                             </button>
