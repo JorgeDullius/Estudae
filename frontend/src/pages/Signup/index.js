@@ -15,74 +15,95 @@ class Signup extends Component {
     constructor(props){
         super(props);
         this.state = { 
-            name:'', 
-            password:'', 
-            email:'',
-            nameError:'',
-            passwordError:'',
-            emailError:'',
+            name:{
+                value:'',
+                error:'',
+                touched:false
+            }, 
+            password:{
+                value:'',
+                error:'',
+                touched:false
+            }, 
+            email:{
+                value:'',
+                error:'',
+                touched:false
+            },
             formIsValid: false
         }
     }
+    
     formValidate = () => {
-        if(this.state.nameError === '' && this.state.passwordError === '' && this.state.emailError === '' && this.state.name !== '' && this.state.password !== '' && this.state.email !== '' ){
+        if( this.state.name.value !== "" && this.state.password.value !== "" && this.state.email.value !== "" && this.state.name.error === '' && this.state.password.error === '' && this.state.email.error === '' ){
             this.setState({formIsValid: true})
         }else{
             this.setState({formIsValid: false})
         }
     }
-    validateName = () => {
-        const {name} = this.state; 
+    validateName = (name) => {
         if(!name || name.trim() === ''){
-            this.setState({nameError : "Please type your name"});
-            this.formValidate();
-            return false;
+            return "Please type your name";
         }
-        this.formValidate();
-        return true;
+        return "";
     }
-    validatePassword = () => {
-        const {password} = this.state; 
+    validatePassword = (password) => {
         if(!password || password.trim() === ''){
-            this.setState({passwordError : "Please type your password"});
-            this.formValidate();
-            return false;
+            return "Please type your password";
         }
         else if(password.length < 6){
-            this.setState({passwordError : "Your password must be longer than 6 characters"});
-            this.formValidate();
-            return false;
+            return "Your password must be longer than 6 characters";
         }
-        this.formValidate();
-        return true;
+        return "";
     }    
-    validateEmail = () => {
-        const {email} = this.state; 
+    validateEmail = (email) => {
         if(!email || email.trim() === ''){
-            this.setState({emailError : "Please type your email"});
-            this.formValidate();
-            return false;
+            return "Please type your email";
         }else if (email.indexOf(['@ifms.edu.br']) === -1){
-            this.setState({emailError : 'Please enter an email with the termination "@ifms.edu.br"'});
-            this.formValidate();
-            return false;
+            return 'Please enter an email with the termination "@ifms.edu.br"';
         }
-        this.formValidate();
-        return true;
+        return "";
     }
-
     handleInputChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        this.setState({
-            [name]: value
-        });
+        let newState = {
+            value:value,
+            error:this.validateName(value),
+            touched:this.state[name].touched
+        };
+        if(name === "name" ){
+            newState.error = this.validateName(value);
+        }else if(name === "password"){
+            newState.error = this.validatePassword(value);
+        }else if(name === "email"){
+            newState.error = this.validateEmail(value);
+        }
+        this.setState(
+            (prevState)=>{
+                return {
+                    ...prevState,
+                    [name]:{...newState}
+                };
+            }
+        )
         this.formValidate();
+    }
+    handleOnBlur = (event) => {
+        const name = event.target.name;
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                [name]:{
+                    ...prevState[name],
+                    touched:true
+                }
+            }
+        });
     }
     handleSubmit = async (event) => {
         event.preventDefault();
         const { name, password, email} = this.state;
-
         if(this.validateName() === true && this.validateEmail() === true && this.validatePassword() === true){
             try{
                 const response = await api.post('/auth/register', {
@@ -133,16 +154,15 @@ class Signup extends Component {
                                 <input 
                                     className = "input__signup"
                                     type="text" 
-                                    value = {this.state.name} 
+                                    value = {this.state.name.value} 
                                     placeholder="Your name here" 
                                     name="name" 
-                                    onBlur={this.validateName} 
-                                    onFocus={() => this.setState({nameError: ""})} 
+                                    onBlur={this.handleOnBlur}
                                     onChange = {this.handleInputChange} 
                                 />
-                                <span className={this.state.nameError !== '' ? "negativeFeedback" : "positiveFeedback"}>
+                                <span className={this.state.name.error !== '' && this.state.name.touched === true ? "negativeFeedback" : "positiveFeedback"}>
                                     <FontAwesomeIcon icon={faExclamationCircle} />
-                                    {this.state.nameError}
+                                    {this.state.name.error}
                                 </span>
                             </label>
 
@@ -151,16 +171,15 @@ class Signup extends Component {
                                 <input 
                                     className = "input__signup"
                                     type="password" 
-                                    value = {this.state.password} 
+                                    value = {this.state.password.value}
                                     placeholder="Your password here" 
                                     name="password" 
-                                    onBlur={this.validatePassword} 
-                                    onFocus={() => this.setState({passwordError: ""})} 
                                     onChange={this.handleInputChange}
+                                    onBlur={this.handleOnBlur}
                                 />
-                                <span className={this.state.passwordError !== '' ? "negativeFeedback" : "positiveFeedback"}>
+                                <span className={(this.state.password.error !== '' && this.state.password.touched === true) ? "negativeFeedback" : "positiveFeedback"}>
                                     <FontAwesomeIcon icon={faExclamationCircle} color="red" /> 
-                                    {this.state.passwordError}
+                                    {this.state.password.error}
                                 </span>                          
                             </label> 
 
@@ -169,16 +188,15 @@ class Signup extends Component {
                                 <input 
                                     className = "input__signup"
                                     type="text" 
-                                    value = {this.state.email} 
+                                    value = {this.state.email.value} 
                                     placeholder="Your email here" 
                                     name="email" 
-                                    onBlur={this.validateEmail} 
-                                    onFocus={() => this.setState({emailError: ""})} 
                                     onChange={this.handleInputChange}
+                                    onBlur={this.handleOnBlur}
                                 />
-                                <span className={this.state.emailError !== '' ? "negativeFeedback" : "positiveFeedback"}>
+                                <span className={this.state.email.error !== '' && this.state.email.touched === true ? "negativeFeedback" : "positiveFeedback"}>
                                     <FontAwesomeIcon icon={faExclamationCircle} color="red" /> 
-                                    {this.state.emailError}
+                                    {this.state.email.error}
                                 </span>
                             </label>
                             <button disabled = {!this.state.formIsValid}> 
