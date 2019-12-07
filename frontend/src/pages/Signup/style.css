@@ -33,7 +33,7 @@
 }
 .login{
     display:flex;
-    width: 85vw;
+    width: 83vw;
     flex-direction: row;
     align-content: center;
     justify-content: space-between;
@@ -54,7 +54,7 @@
 .login form #labelForm{
     font-family: 'Lato';
     font-weight: 900;
-    color: #2D4885;
+    color: black;
     font-size:15px;
     display: flex;
     flex-direction: column;
@@ -97,7 +97,7 @@
     width:100%;
     border-radius: 25px;
     border:1px solid;
-    border-color: #00B2FF;
+    border-color: #009152;
     height: 51px;
     margin-top:7px;
     font-family: 'Lato';
@@ -110,8 +110,8 @@
     outline: 0;
 }
 .input__signup:focus, .input__signup:focus{
-    box-shadow: 0px 0px 0px 2px #6C63FF;
-    border-color: #6C63FF;
+    box-shadow: 0px 0px 0px 2px #00B36B;
+    border-color: #00B36B;
 }
 .login a{
     font-family: 'Lato';
@@ -126,7 +126,7 @@
     font-family: "Arial";
     font-size: 23px;
     font-weight: bold;
-    background-color: #00B2FF;
+    background-color: #00B36B;
     border:none;
     width: 150px;
     height: 50px;
@@ -135,7 +135,7 @@
 }
 .login form button:disabled{
     cursor: not-allowed;   
-    background-color: rgba(0, 179, 255, 0.51);
+    background-color: #00B36B;
 }
 .login form button:enabled span {
     display: inline-block;

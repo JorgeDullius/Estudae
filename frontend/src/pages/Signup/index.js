@@ -33,13 +33,20 @@ class Signup extends Component {
             formIsValid: false
         }
     }
-    
-    formValidate = () => {
+    componentDidUpdate(){
         if( this.state.name.value !== "" && this.state.password.value !== "" && this.state.email.value !== "" && this.state.name.error === '' && this.state.password.error === '' && this.state.email.error === '' ){
-            this.setState({formIsValid: true})
+            if(this.state.formIsValid !== true){
+                this.setState({formIsValid: true})
+            }
         }else{
-            this.setState({formIsValid: false})
-        }
+            if(this.state.formIsValid !== false){
+                this.setState({formIsValid: false})
+            }
+        }       
+    }
+        }       
+    }
+        }       
     }
     validateName = (name) => {
         if(!name || name.trim() === ''){
@@ -69,7 +76,6 @@ class Signup extends Component {
         const value = event.target.value;
         let newState = {
             value:value,
-            error:this.validateName(value),
             touched:this.state[name].touched
         };
         if(name === "name" ){
@@ -87,7 +93,6 @@ class Signup extends Component {
                 };
             }
         )
-        this.formValidate();
     }
     handleOnBlur = (event) => {
         const name = event.target.name;
