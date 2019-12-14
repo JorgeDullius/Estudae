@@ -26,12 +26,12 @@
     color: #fafafa;
     font-family: 'Nunito';
     font-weight: 900;
-    font-size: 4rem;
+    font-size: 2.5rem;
 }
 .header .header--container .header--textbox p{
     color: #fafafaaa;
     font-family: 'Nunito';
-    font-size: 2.2rem;
+    font-size: 1.375rem;
 }
 .header .header--container .header--img img{
     width:100%;
@@ -61,7 +61,7 @@
 .about .first--about--container .textbox p{
     color: rgb(132, 141, 158);
     font-family: 'Nunito';
-    font-size: 2rem;
+    font-size: 1.25rem;
 }
 .about .second--about--container{
     height: 35%;
@@ -82,7 +82,7 @@
 .about .second--about--container .circle-subject h5,.circle-questions h5{
     font-family: 'Nunito';
     font-weight: 900;
-    font-size: 2.4em;
+    font-size: 1.5em;
     color:rgb(45, 228, 115);
 }
 .elipse{
@@ -126,29 +126,28 @@
 .about h3{ 
     color: rgb(132, 141, 158);
     font-family: 'Nunito';
-    font-size: 1.7rem;
+    font-size: 1.08rem;
     text-align: center;
 }
 .about h4{ 
     font-family: 'Nunito';
     font-weight: 900;
     line-height: 1.7;
-    font-size: 4rem;
+    font-size: 2.5rem;
     background-image: linear-gradient(to right, #7ed56f, #28b485);
     text-align: center;
     -webkit-background-clip: text;
     color: transparent;
-    letter-spacing: .2rem;
 }
 @media screen and (max-width: 360px) {
     .header .header--container .header--textbox h1{
-        font-size: 3rem;
+        font-size: 1.875rem;
     }
     .header .header--container .header--textbox p{
-        font-size: 1.5rem;
+        font-size: 0.93rem;
     }
     .about h4{ 
-        font-size: 3rem;
+        font-size: 1.875rem;
     }
     .elipse{
         height: 140px;

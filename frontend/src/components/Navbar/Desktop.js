@@ -11,9 +11,9 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   appBar: {
-    backgroundColor: "#01579B",
+    backgroundColor: props => props.backgroundColor,
     boxShadow: 'none',
-    paddingTop:theme.spacing(2)
+    zIndex:1201
   },
   loginButton: {
     color: 'white',
@@ -27,7 +27,6 @@ const useStyles = makeStyles(theme => ({
     fontWeight:'bold',
     fontSize: '20px',
     lineHeight: '1.5',
-
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -40,17 +39,17 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
     marginLeft: theme.spacing(4),
+    marginTop: theme.spacing(1)
   }
-  
 }));
-function NavBarDesktop() {
-  const classes = useStyles();
+function NavBarDesktop(props) {
+  const classes = useStyles(props);
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar >
-          <Typography variant="h1" className={classes.title}>
-            <img  src={logo} alt="" className={classes.title}/>
+          <Typography className={classes.title}>
+            <img  src={logo} alt="" />
           </Typography>
           <Button color="inherit" className={classes.menuButton}>
             Consultar

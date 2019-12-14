@@ -14,7 +14,7 @@ export default class Home extends React.Component {
   render(){
     return (
       <>
-        <NavBar />
+        <NavBar backgroundColor = "#01579B"/>
         <section className = "header">
           <div className = "header--container">
             <div className = "header--img">

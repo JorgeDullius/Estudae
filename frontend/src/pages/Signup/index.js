@@ -44,10 +44,6 @@ class Signup extends Component {
             }
         }       
     }
-        }       
-    }
-        }       
-    }
     validateName = (name) => {
         if(!name || name.trim() === ''){
             return "Please type your name";
@@ -108,8 +104,11 @@ class Signup extends Component {
     }
     handleSubmit = async (event) => {
         event.preventDefault();
-        const { name, password, email} = this.state;
-        if(this.validateName() === true && this.validateEmail() === true && this.validatePassword() === true){
+        let { name, password, email} = this.state;
+        name = name.value;
+        password = password.value;
+        email = email.value;
+        if(this.state.formIsValid){
             try{
                 const response = await api.post('/auth/register', {
                     name,
