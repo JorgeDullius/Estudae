@@ -12,6 +12,7 @@ export default class ExerciseList extends Component {
   render() {
     return (
       <>
+        <NavBar backgroundColor="#009152"/>
         <Drawer backgroundColor = "black"/>
       </>
     )

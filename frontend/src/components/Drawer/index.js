@@ -50,7 +50,7 @@ export default function ClippedDrawer(props) {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <NavBar backgroundColor={props.backgroundColor}/>
+            
             <Drawer
                 className={classes.drawer}
                 variant="permanent"
