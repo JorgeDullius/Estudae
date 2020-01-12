@@ -25,7 +25,7 @@ export default class Home extends React.Component {
               <p>
                 Presentations are communication tools 
                 that can be used as demonstrations, 
-                lectures, speeches, reports, and more. 
+                lectures, speeches, and more. 
               </p>
               <Button type ="fab"text = "Saiba mais"/>
             </div>
